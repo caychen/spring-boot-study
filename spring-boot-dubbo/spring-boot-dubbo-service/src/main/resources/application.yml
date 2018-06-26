@@ -1,0 +1,22 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: dubbo-service-provider
+
+dubbo:
+  scan:
+    base-packages: org.com.cay.dubbo # 用于扫描dubbo注解
+  application:
+    id: dubbo-service-provider
+    name: dubbo-service-provider
+  protocol:
+    id: dubbo
+    name: dubbo
+    port: 20881
+    status: server
+  registry:
+    id: registry-server
+    address: localhost:2181
+    protocol: zookeeper
