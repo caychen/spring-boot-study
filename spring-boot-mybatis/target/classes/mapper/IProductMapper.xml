@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="org.com.cay.springboot.mapper.IProductMapper">
+
+    <select id="findByName" parameterType="string" resultType="product">
+      select * from product where name = #{name}
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into product(name, price) values(#{name}, #{price})
+    </insert>
+
+    <delete id="deleteAll">
+      delete from product
+    </delete>
+</mapper>

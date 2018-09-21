@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+	<meta charset="UTF-8"/>
+	<title>系统首页</title>
+</head>
+<body>
+<h2>恭喜
+	<shiro:principal property="username"/>
+	，您已经登录到本系统中，您可以尽情地玩耍啦！<a th:href="@{/logout}">注销</a></h2>
+
+<shiro:hasRole name="admin">
+	您有Admin角色！
+</shiro:hasRole>
+
+<shiro:hasRole name="user">
+	您有User角色！
+</shiro:hasRole>
+
+<shiro:hasRole name="guest">
+	您有Guest角色！
+</shiro:hasRole>
+
+<shiro:hasRole name="vip">
+	您有VIP角色！
+</shiro:hasRole>
+
+<shiro:authenticated>
+	<shiro:hasPermission name="userInfo:view">
+		<ul>
+			<shiro:hasPermission name="userInfo:add">
+				<li>新增</li>
+			</shiro:hasPermission>
+
+			<shiro:hasPermission name="userInfo:del">
+				<li>删除</li>
+			</shiro:hasPermission>
+		</ul>
+	</shiro:hasPermission>
+</shiro:authenticated>
+
+/*测试注解*/
+<a th:href="@{/del}">删除</a>
+</body>
+</html>
