@@ -1,11 +1,10 @@
 package org.com.cay.springboot.test;
 
+import org.com.cay.springboot.mail.service.MailService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
@@ -16,16 +15,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class SimpleMailTest {
 
 	@Autowired
-	private JavaMailSender javaMailSender;
+	private MailService mailService;
 
 	@Test
 	public void sendMail(){
-		SimpleMailMessage mailMessage = new SimpleMailMessage();
-		mailMessage.setFrom("1243505830@qq.com");
-		mailMessage.setTo("412425870@qq.com");
-		mailMessage.setSubject("测试Springboot发送邮件");
-		mailMessage.setText("发送邮件...");
 
-		javaMailSender.send(mailMessage);
+		mailService.sendSimpleMail("测试Springboot发送邮件", "发送邮件...");
 	}
 }

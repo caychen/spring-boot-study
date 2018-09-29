@@ -86,23 +86,5 @@
     <orderEntry type="library" name="Maven: com.mchange:c3p0:0.9.5.2" level="project" />
     <orderEntry type="library" name="Maven: com.mchange:mchange-commons-java:0.2.11" level="project" />
     <orderEntry type="library" name="Maven: com.alibaba:druid:1.1.2" level="project" />
-    <orderEntry type="module-library">
-      <library name="Maven: com.alibaba:jconsole:1.8.0">
-        <CLASSES>
-          <root url="jar://D:/Program Files/Java/jdk1.8.0_171/lib/jconsole.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Maven: com.alibaba:tools:1.8.0">
-        <CLASSES>
-          <root url="jar://D:/Program Files/Java/jdk1.8.0_171/lib/tools.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
   </component>
 </module>
