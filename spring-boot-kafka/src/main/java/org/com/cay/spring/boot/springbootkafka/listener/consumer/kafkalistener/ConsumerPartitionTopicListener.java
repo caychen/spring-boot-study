@@ -18,11 +18,13 @@ import java.util.List;
 @Component
 public class ConsumerPartitionTopicListener {
 
-    @KafkaListener(containerFactory = "batchContainerFactory", topicPartitions = {
+    //该监听了分区为0和2的topic-foo和分区为1号的topic-bar队列
+    @KafkaListener(id = "listener1", containerFactory = "batchContainerFactory", topicPartitions = {
             @TopicPartition(topic = "topic-foo", partitions = {"0", "2"}),
             @TopicPartition(topic = "topic-bar", partitions = "1")
     })
-    public void listen1(List<ConsumerRecord> records){
+    public void listen1(List<ConsumerRecord> records) {
+        log.info("ConsumerPartitionTopicListener#listen1=======================");
         records.stream().forEach(record -> {
             log.info("topic: [{}]", record.topic());
             log.info("partition: [{}]", record.partition());
@@ -31,11 +33,13 @@ public class ConsumerPartitionTopicListener {
         });
     }
 
-    @KafkaListener(containerFactory = "batchContainerFactory", topicPartitions = {
+    //该监听了分区为1的topic-foo和分区为0号的topic-bar队列
+    @KafkaListener(id = "listener2", containerFactory = "batchContainerFactory", topicPartitions = {
             @TopicPartition(topic = "topic-foo", partitions = {"1"}),
             @TopicPartition(topic = "topic-bar", partitions = "0")
     })
-    public void listen2(List<ConsumerRecord> records){
+    public void listen2(List<ConsumerRecord> records) {
+        log.info("ConsumerPartitionTopicListener#listen2########################");
         records.stream().forEach(record -> {
             log.info("topic: [{}]", record.topic());
             log.info("partition: [{}]", record.partition());

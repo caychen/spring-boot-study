@@ -33,25 +33,33 @@ public class KafkaConsumerConfig {
     public Map<String, Object> consumerProperites(){
         Map<String, Object> consumerProperties = Maps.newHashMap();
 
-        //brokers集群
+        //brokers集群地址
         //bootstrap.servers
         consumerProperties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
 
-        //是否自动提交
+        //是否自动提交(默认true),Consumer 在commit offset时有两种模式：自动提交，手动提交。手动提交在前面已经说过。自动提交：是Kafka Consumer会在后台周期性的去commit。
         //enable.auto.commit
         consumerProperties.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
 
-        //自动提交周期
+        //自动提交周期(默认5000ms)
         //auto.commit.interval.ms
         consumerProperties.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, 100);
 
-        //
+        //心跳间隔时间，此值必须小于session.timeout.ms
+        //heartbeat.interval.ms
+        consumerProperties.put(ConsumerConfig.HEARTBEAT_INTERVAL_MS_CONFIG, 10000);
+
+        //Consumer session 过期时间(默认10000ms)，这个值必须设置在broker configuration中的group.min.session.timeout.ms 与 group.max.session.timeout.ms之间。
         //session.timeout.ms
         consumerProperties.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, 15000);
 
+        //poll消息时的最大间隔时间
+        //max.poll.interval.ms
+        consumerProperties.put(ConsumerConfig.MAX_POLL_INTERVAL_MS_CONFIG, 10000);
+
         //每次消费的条数，默认500
         //max.poll.records
-        consumerProperties.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, 100);
+        consumerProperties.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, 10);
 
         //消费者群组ID
         //group.id
@@ -125,14 +133,14 @@ public class KafkaConsumerConfig {
         return new KafkaAdmin(props);
     }
 
-    @Bean(name = "foo")
+    @Bean
     public NewTopic fooTopic(){
-        return new NewTopic("topic-foo", 3, (short)2);
+        return new NewTopic("topic-foo", 3, (short)1);
     }
 
-    @Bean(name = "bar")
+    @Bean
     public NewTopic barTopic(){
-        return new NewTopic("topic-bar", 2, (short)2);
+        return new NewTopic("topic-bar", 2, (short)1);
     }
 
 }
