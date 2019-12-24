@@ -1,0 +1,12 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info, health #默认只开放了info和health端点
+      #不暴露端点
+#        exclude:
+        #暴露的端点
+#        include: "*" #将所有端点都暴露出来
+  endpoint:
+    health:
+      show-details: always
